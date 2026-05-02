@@ -1,6 +1,6 @@
 import { useHttp } from '@inertiajs/react';
 import { useCallback, useState } from 'react';
-import { qrCode, recoveryCodes, secretKey } from '@/routes/two-factor';
+// import { qrCode, recoveryCodes, secretKey } from '@/routes/two-factor';
 
 export type UseTwoFactorAuthReturn = {
     qrCodeSvg: string | null;
@@ -48,7 +48,9 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
 
     const fetchQrCode = useCallback(async (): Promise<void> => {
         try {
-            const { svg } = (await submit(qrCode())) as {
+            const { svg } = (await submit(
+                // qrCode()
+            )) as {
                 svg: string;
                 url: string;
             };
@@ -62,7 +64,9 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
 
     const fetchSetupKey = useCallback(async (): Promise<void> => {
         try {
-            const { secretKey: key } = (await submit(secretKey())) as {
+            const { secretKey: key } = (await submit(
+                // secretKey()
+            )) as {
                 secretKey: string;
             };
 
@@ -76,7 +80,9 @@ export const useTwoFactorAuth = (): UseTwoFactorAuthReturn => {
     const fetchRecoveryCodes = useCallback(async (): Promise<void> => {
         try {
             setErrors([]);
-            const codes = (await submit(recoveryCodes())) as string[];
+            const codes = (await submit(
+                // recoveryCodes()
+            )) as string[];
             setRecoveryCodesList(codes);
         } catch {
             setErrors((prev) => [...prev, 'Failed to fetch recovery codes']);
