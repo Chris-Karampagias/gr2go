@@ -4,6 +4,7 @@ namespace Tests;
 
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 abstract class TestCase extends BaseTestCase
@@ -12,6 +13,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->withoutMiddleware(PreventRequestForgery::class);
+        Inertia::disableSsr();
     }
 
     protected function skipUnlessFortifyHas(string $feature, ?string $message = null): void

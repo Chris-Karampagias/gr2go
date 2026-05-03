@@ -1,10 +1,15 @@
+import type { ReactNode } from 'react';
 import { AppContent } from '@/components/app-content';
 import { AppShell } from '@/components/app-shell';
 import { AppSidebar } from '@/components/app-sidebar';
 import { AppSidebarHeader } from '@/components/app-sidebar-header';
-import type { AppLayoutProps } from '@/types';
+import type { BreadcrumbItem } from '@/types/navigation';
 
-export default function AppSidebarLayout({
+type AppLayoutProps = {
+    children: ReactNode;
+    breadcrumbs?: BreadcrumbItem[];
+};
+export default function AppLayout({
     children,
     breadcrumbs = [],
 }: AppLayoutProps) {
