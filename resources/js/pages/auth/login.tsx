@@ -101,7 +101,6 @@ export default function Login({ status }: Props) {
                     <Button
                         type="button"
                         size="lg"
-                        variant="outline"
                         className="relative w-full bg-[#1877f2]"
                     >
                         <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
@@ -118,7 +117,6 @@ export default function Login({ status }: Props) {
                     </Button>
                     <Button
                         type="button"
-                        variant="outline"
                         className="relative w-full bg-white text-background"
                     >
                         <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
@@ -147,11 +145,7 @@ export default function Login({ status }: Props) {
                         </span>
                         Continue with Google
                     </Button>
-                    <Button
-                        type="button"
-                        variant="ghost"
-                        className="relative w-full bg-card"
-                    >
+                    <Button type="button" className="relative w-full bg-card">
                         <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
                             <svg
                                 className="size-6"
