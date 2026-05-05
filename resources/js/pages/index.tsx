@@ -1,8 +1,8 @@
 import { Link } from '@inertiajs/react';
 import AppHead from '@/components/app-head';
+import AppLogoIcon from '@/components/app-logo-icon';
 import { Button } from '@/components/ui/button';
 import { login } from '@/routes';
-import gr2goLogo from '../../assets/images/gr2go-logo-transparent.png';
 import homeImage from '../../assets/images/index.png';
 
 export default function Index() {
@@ -17,16 +17,8 @@ export default function Index() {
                 />
                 <div className="absolute inset-0 z-20 flex h-full flex-col items-center justify-center">
                     <div className="flex flex-col transition-[opacity,display] duration-1000 ease-in starting:opacity-0">
-                        <img
-                            src={gr2goLogo}
-                            alt="gr2go logo"
-                            className="size-60 object-contain"
-                        />
-                        <Button
-                            size="lg"
-                            className="animate-[bounce_1.2s_ease-in-out_1.2s_2.5]"
-                            asChild
-                        >
+                        <AppLogoIcon size={60} />
+                        <Button size="lg" asChild>
                             <Link href={login()}>Είσοδος στην εφαρμογή</Link>
                         </Button>
                     </div>

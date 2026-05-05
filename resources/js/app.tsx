@@ -8,7 +8,7 @@ import AuthLayout from '@/pages/auth/layout';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-createInertiaApp({
+void createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
     layout: (pageName) => {
         switch (true) {
