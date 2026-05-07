@@ -5,7 +5,6 @@ import { Toaster } from '@/components/ui/sonner';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Locale } from '@/enums/locale';
 import { initializeTheme } from '@/hooks/use-appearance';
-import { useLocale } from '@/hooks/use-locale';
 import AppLayout from '@/pages/app/layout';
 import SettingsLayout from '@/pages/app/settings/layout';
 import RootLayout from '@/pages/layout';

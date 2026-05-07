@@ -1,5 +1,6 @@
-import { Form, Head, usePage } from '@inertiajs/react';
+import { Form, Link, usePage } from '@inertiajs/react';
 import { User } from 'lucide-react';
+import { store } from '@/actions/Laravel/Fortify/Http/Controllers/AuthenticatedSessionController';
 import AppHead from '@/components/app-head';
 import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
@@ -8,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { FieldGroup, FieldSeparator } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
-import { store } from '@/routes/login';
+import { register } from '@/routes';
 import type { PublicLoginTranslations } from '@/types/translations/public/login';
 
 type Props = {
@@ -25,17 +26,18 @@ export default function Login({ status }: Props) {
                 title={pageTranslations.page_title}
                 description={pageTranslations.page_title}
             />
-            <div className="flex w-full flex-col gap-8">
-                <div className="flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-6">
+                <div className="flex flex-col">
                     <Form
                         {...store.form()}
                         disableWhileProcessing
+                        noValidate
                         resetOnSuccess={['password']}
-                        className="flex flex-col gap-6 px-6"
+                        className="flex flex-col gap-4 px-6"
                     >
                         {({ processing, errors, isDirty }) => (
                             <>
-                                <FieldGroup>
+                                <FieldGroup className="gap-4">
                                     <FormField
                                         name="email"
                                         label={pageTranslations.email_label}
@@ -60,7 +62,11 @@ export default function Login({ status }: Props) {
                                     <PasswordInput
                                         id="password"
                                         name="password"
+                                        label={pageTranslations.password_label}
                                         canReset
+                                        forgotPasswordLabel={
+                                            pageTranslations.forgot_password_label
+                                        }
                                         required
                                         tabIndex={2}
                                         autoComplete="current-password"
@@ -102,15 +108,22 @@ export default function Login({ status }: Props) {
                     )}
                 </div>
                 <FieldSeparator>{pageTranslations.separator_or}</FieldSeparator>
-                <div className="flex flex-col gap-5 px-6">
-                    <Button type="button" size="lg" className="relative w-full">
-                        <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
-                            <User
-                                className="size-6 shrink-0"
-                                strokeWidth={2.25}
-                            />
-                        </span>
-                        {pageTranslations.create_account}
+                <div className="flex flex-col gap-3.5 px-6">
+                    <Button
+                        asChild
+                        type="button"
+                        size="lg"
+                        className="relative w-full"
+                    >
+                        <Link href={register()}>
+                            <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
+                                <User
+                                    className="size-6 shrink-0"
+                                    strokeWidth={2.25}
+                                />
+                            </span>
+                            {pageTranslations.create_account}
+                        </Link>
                     </Button>
                     <Button
                         type="button"

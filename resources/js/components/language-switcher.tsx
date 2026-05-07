@@ -23,7 +23,10 @@ export function LanguageSwitcher() {
             defaultValue={locale}
             onValueChange={(value) => {
                 localStorage.setItem('locale', value);
-                router.reload({ only: ['locale', 'pageTranslations'] });
+                router.reload({
+                    only: ['locale', 'pageTranslations'],
+                    showProgress: true,
+                });
             }}
         >
             <SelectTrigger
@@ -33,7 +36,7 @@ export function LanguageSwitcher() {
             >
                 <SelectValue />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="mr-10">
                 {locales.map(({ code, flag }) => (
                     <SelectItem key={code} value={code}>
                         <span aria-hidden className="text-base leading-none">
