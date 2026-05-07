@@ -1,5 +1,7 @@
 <?php
 
+use App\Enums\Locale;
+
 return [
 
     /*
@@ -78,9 +80,9 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    'locale' => env('APP_LOCALE', Locale::EN->value),
 
-    'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
+    'fallback_locale' => env('APP_FALLBACK_LOCALE', Locale::EN->value),
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 

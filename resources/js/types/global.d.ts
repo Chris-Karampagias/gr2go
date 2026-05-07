@@ -6,6 +6,10 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
+            locale: Locale;
+            pageTranslations:
+                | Record<string, string>
+                | Record<'layout', Record<string, string>>;
             [key: string]: unknown;
         };
     }

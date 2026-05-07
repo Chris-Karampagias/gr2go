@@ -12,7 +12,9 @@ export default function AppLogoIcon({
         <img
             alt="gr2go logo"
             src={gr2goLogo}
-            className={'object-contain ' + cn(className, `size-${size}`)}
+            className={
+                'object-contain ' + cn(className, `h-[${size}rem] w-auto`)
+            }
         />
     );
 }

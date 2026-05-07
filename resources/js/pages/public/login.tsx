@@ -1,5 +1,6 @@
-import { Form, Head } from '@inertiajs/react';
+import { Form, Head, usePage } from '@inertiajs/react';
 import { User } from 'lucide-react';
+import AppHead from '@/components/app-head';
 import { FormField } from '@/components/form-field';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
@@ -8,15 +9,22 @@ import { FieldGroup, FieldSeparator } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Spinner } from '@/components/ui/spinner';
 import { store } from '@/routes/login';
+import type { PublicLoginTranslations } from '@/types/translations/public/login';
 
 type Props = {
     status?: string;
 };
 
 export default function Login({ status }: Props) {
+    const pageTranslations = usePage().props
+        .pageTranslations as PublicLoginTranslations;
+
     return (
         <>
-            <Head title="Log in" />
+            <AppHead
+                title={pageTranslations.page_title}
+                description={pageTranslations.page_title}
+            />
             <div className="flex w-full flex-col gap-8">
                 <div className="flex flex-col gap-1">
                     <Form
@@ -30,7 +38,7 @@ export default function Login({ status }: Props) {
                                 <FieldGroup>
                                     <FormField
                                         name="email"
-                                        label="Email address"
+                                        label={pageTranslations.email_label}
                                         error={errors.email}
                                     >
                                         <Input
@@ -38,11 +46,15 @@ export default function Login({ status }: Props) {
                                             type="email"
                                             name="email"
                                             required
-                                            aria-label="Email"
+                                            aria-label={
+                                                pageTranslations.email_aria
+                                            }
                                             autoFocus
                                             tabIndex={1}
                                             autoComplete="email"
-                                            placeholder="email@example.com"
+                                            placeholder={
+                                                pageTranslations.email_placeholder
+                                            }
                                         />
                                     </FormField>
                                     <PasswordInput
@@ -52,13 +64,15 @@ export default function Login({ status }: Props) {
                                         required
                                         tabIndex={2}
                                         autoComplete="current-password"
-                                        placeholder="Password"
+                                        placeholder={
+                                            pageTranslations.password_placeholder
+                                        }
                                         error={errors.password}
                                     />
 
                                     <FormField
                                         name="remember"
-                                        label="Remember me"
+                                        label={pageTranslations.remember_me}
                                     >
                                         <Checkbox
                                             id="remember"
@@ -76,7 +90,7 @@ export default function Login({ status }: Props) {
                                     data-test="login-button"
                                 >
                                     {processing && <Spinner />}
-                                    Sign in
+                                    {pageTranslations.sign_in}
                                 </Button>
                             </>
                         )}
@@ -87,8 +101,8 @@ export default function Login({ status }: Props) {
                         </div>
                     )}
                 </div>
-                <FieldSeparator>or</FieldSeparator>
-                <div className="flex flex-col gap-3 px-6">
+                <FieldSeparator>{pageTranslations.separator_or}</FieldSeparator>
+                <div className="flex flex-col gap-5 px-6">
                     <Button type="button" size="lg" className="relative w-full">
                         <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
                             <User
@@ -96,7 +110,7 @@ export default function Login({ status }: Props) {
                                 strokeWidth={2.25}
                             />
                         </span>
-                        Create an Account
+                        {pageTranslations.create_account}
                     </Button>
                     <Button
                         type="button"
@@ -113,7 +127,7 @@ export default function Login({ status }: Props) {
                                 <path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z" />
                             </svg>
                         </span>
-                        Continue with Facebook
+                        {pageTranslations.continue_facebook}
                     </Button>
                     <Button
                         type="button"
@@ -143,7 +157,7 @@ export default function Login({ status }: Props) {
                                 />
                             </svg>
                         </span>
-                        Continue with Google
+                        {pageTranslations.continue_google}
                     </Button>
                     <Button type="button" className="relative w-full bg-card">
                         <span className="pointer-events-none absolute left-4 flex size-9 items-center justify-center">
@@ -156,7 +170,7 @@ export default function Login({ status }: Props) {
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
                             </svg>
                         </span>
-                        Continue with Apple
+                        {pageTranslations.continue_apple}
                     </Button>
                 </div>
             </div>
@@ -164,7 +178,13 @@ export default function Login({ status }: Props) {
     );
 }
 
-Login.layout = {
-    title: 'Log in to your account',
-    description: 'Enter your email and password below to log in',
+Login.layout = ({
+    pageTranslations,
+}: {
+    pageTranslations: PublicLoginTranslations;
+}) => {
+    return {
+        title: pageTranslations.layout.title,
+        description: pageTranslations.layout.description,
+    };
 };

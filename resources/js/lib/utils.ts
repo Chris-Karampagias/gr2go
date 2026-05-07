@@ -10,3 +10,14 @@ export function cn(...inputs: ClassValue[]) {
 export function toUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
+export function t(value: string, replacements?: Record<string, string>) {
+    if (!replacements) {
+        return value;
+    }
+
+    return Object.entries(replacements).reduce(
+        (acc, [key, value]) => acc.replace(`:${key}`, value),
+        value,
+    );
+}
