@@ -16,7 +16,7 @@ class HandleInertiaRequests extends Middleware
         'register' => 'public/register',
         'password.request' => 'public/password/request',
         'password.reset' => 'public/password/reset',
-        'verification.notice' => 'public/verification/notice',
+        'verification.notice' => 'app/verification/notice',
         'two-factor.login' => 'public/two-factor',
     ];
 
@@ -63,8 +63,8 @@ class HandleInertiaRequests extends Middleware
             return [];
         }
 
-        if (isset(self::FORTIFY_TRANSLATION_MAP[$route_name])) {
-            return __(self::FORTIFY_TRANSLATION_MAP[$route_name]);
+        if (isset(self::FORTIFY_TRANSLATION_MAP[config('fortify.prefix').$route_name])) {
+            return __(self::FORTIFY_TRANSLATION_MAP[config('fortify.prefix').$route_name]);
         }
 
         $translation_path = str_replace('.', '/', $route_name);

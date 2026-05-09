@@ -1,43 +1,57 @@
-import { Form, Head } from '@inertiajs/react';
-import TextLink from '@/components/text-link';
+import { Form, usePage } from '@inertiajs/react';
+import AppHead from '@/components/app-head';
 import Heading from '@/components/heading';
+import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 import { logout } from '@/routes';
 import { notice, send } from '@/routes/verification';
+import type { AppVerificationNoticeTranslations } from '@/types/translations/app/verification/notice';
 
-export default function VerifyEmail({ status }: { status?: string }) {
+type Props = {
+    status?: string;
+};
+
+export default function VerifyEmail({ status }: Props) {
+    const pageTranslations = usePage().props
+        .pageTranslations as AppVerificationNoticeTranslations;
+
     return (
         <>
-            <Head title="Email verification" />
+            <AppHead
+                title={pageTranslations.page_title}
+                description={pageTranslations.heading_description}
+            />
 
-            <div className="space-y-6">
+            <div className="flex flex-col gap-6">
                 <Heading
                     variant="small"
-                    title="Verify email"
-                    description="Please verify your email address by clicking on the link we just emailed to you."
+                    title={pageTranslations.heading_title}
+                    description={pageTranslations.heading_description}
                 />
 
                 {status === 'verification-link-sent' && (
                     <div className="mb-4 text-center text-sm font-medium text-green-600">
-                        A new verification link has been sent to the email
-                        address you provided during registration.
+                        {pageTranslations.status_verification_link_sent}
                     </div>
                 )}
 
-                <Form {...send.form()} className="space-y-6 text-center">
+                <Form
+                    {...send.form()}
+                    className="flex flex-col gap-6 text-center"
+                >
                     {({ processing }) => (
                         <>
                             <Button disabled={processing} variant="secondary">
                                 {processing && <Spinner />}
-                                Resend verification email
+                                {pageTranslations.resend_verification_email}
                             </Button>
 
                             <TextLink
                                 href={logout()}
                                 className="mx-auto block text-sm"
                             >
-                                Log out
+                                {pageTranslations.log_out}
                             </TextLink>
                         </>
                     )}
@@ -47,11 +61,15 @@ export default function VerifyEmail({ status }: { status?: string }) {
     );
 }
 
-VerifyEmail.layout = {
+VerifyEmail.layout = ({
+    pageTranslations,
+}: {
+    pageTranslations: AppVerificationNoticeTranslations;
+}) => ({
     breadcrumbs: [
         {
-            title: 'Verify email',
+            title: pageTranslations.breadcrumb_title,
             href: notice(),
         },
     ],
-};
+});
