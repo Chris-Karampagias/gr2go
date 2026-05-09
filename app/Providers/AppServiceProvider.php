@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Carbon\CarbonImmutable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
@@ -46,5 +49,10 @@ class AppServiceProvider extends ServiceProvider
                 ->uncompromised()
             : null,
         );
+
+        FormRequest::failOnUnknownFields();
+        Model::preventLazyLoading(app()->isLocal());
+        Model::preventSilentlyDiscardingAttributes(app()->isLocal());
+        JsonResource::withoutWrapping();
     }
 }
